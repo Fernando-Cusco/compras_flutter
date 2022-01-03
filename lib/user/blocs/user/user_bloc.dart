@@ -82,13 +82,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     await prefs.clear();
   }
 
-  Future actualizarCliente(Cliente cliente) async {
+  Future<Message> actualizarCliente(Cliente cliente) async {
     final message = await userService.actualizarCliente(cliente);
     if (message.code == 200) {
       add(OnClientUpdate(cliente: cliente));
     } else if (message.code == -1) {
       add(OnClientUpdate(cliente: Cliente.empty()));
     }
+    return message;
   }
 }
 // admin@admin.com

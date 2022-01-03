@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_auth/helpers/show_loading_messages.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 import 'package:user_auth/user/views/cliente_view.dart';
+import 'package:user_auth/user/views/login_view.dart';
 
 class PerfilView extends StatefulWidget {
   const PerfilView({Key? key}) : super(key: key);
@@ -41,11 +42,21 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text("Perfil",
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Perfil",
                       style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.w600))
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.w600)),
+                  IconButton(
+                    icon: const Icon(Icons.logout, color: Colors.black),
+                    onPressed: () {
+                      BlocProvider.of<UserBloc>(context).cerrarSesion();
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginView()));
+                    },
+                  ),
                 ],
               ),
             ),
@@ -60,8 +71,8 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                 indicatorSize: TabBarIndicatorSize.label,
                 indicatorColor: Colors.black,
                 tabs: const [
-                  Text("Datos"),
                   Text("Cliente"),
+                  Text("Credenciales"),
                 ],
               ),
             ),
@@ -71,6 +82,7 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                 child: TabBarView(
                   controller: _tabController,
                   children: [
+                    Expanded(child: ClienteView()),
                     SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -188,7 +200,6 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    ClienteView()
                   ],
                 ),
               ),

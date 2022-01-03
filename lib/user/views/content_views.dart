@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
@@ -26,20 +28,6 @@ class _ContentViewsState extends State<ContentViews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout, color: Colors.black),
-            onPressed: () {
-              BlocProvider.of<UserBloc>(context).cerrarSesion();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const LoginView()));
-            },
-          ),
-        ],
-      ),
       backgroundColor: Colors.white,
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(

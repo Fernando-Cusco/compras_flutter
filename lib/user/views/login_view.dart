@@ -6,6 +6,7 @@ import 'package:user_auth/helpers/show_loading_messages.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 import 'package:user_auth/user/views/content_views.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_auth/user/views/loading_view.dart';
 import 'package:user_auth/user/views/registro_view.dart';
 
 class LoginView extends StatefulWidget {
@@ -181,10 +182,11 @@ class _LoginViewState extends State<LoginView> {
                     } else {
                       await userBloc.prefs.clear();
                     }
+                    log(userBloc.state.user.estado.toString());
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ContentViews()));
+                            builder: (context) => const LoadingView()));
                   }
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => const LoadingScreen()));
                 },

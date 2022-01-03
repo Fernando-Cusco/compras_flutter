@@ -8,6 +8,7 @@ import 'package:user_auth/blocs/auth/auth_bloc.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 import 'package:user_auth/user/services/user_services.dart';
 import 'package:user_auth/user/views/content_views.dart';
+import 'package:user_auth/user/views/loading_view.dart';
 import 'package:user_auth/user/views/user_views.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
@@ -62,6 +63,7 @@ class _MyAppState extends State<MyApp> {
                   } else {
                     prefs.setString('token', user.token!);
                     _isCorrectToken = true;
+                    log(userBloc.state.user.estado.toString());
                   }
                 });
               } else {
@@ -90,7 +92,7 @@ class _MyAppState extends State<MyApp> {
     if (!_initialized) return _container('Loading', Colors.blue);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: (!_isCorrectToken) ? const LoginView() : ContentViews());
+        home: (!_isCorrectToken) ? const LoginView() : const LoadingView());
   }
 
   Widget _container(String title, Color color) {
