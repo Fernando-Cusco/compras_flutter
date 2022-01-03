@@ -31,16 +31,21 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
     final userBloc = BlocProvider.of<UserBloc>(context);
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return SingleChildScrollView(
+      child: SizedBox(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: const [
-                  Text("Perfil", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600))
+                  Text("Perfil",
+                      style:
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.w600))
                 ],
               ),
             ),
@@ -93,41 +98,50 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                                           }
                                           return null;
                                         },
-                                        keyboardType: TextInputType.emailAddress,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
                                         cursorColor: Colors.black,
                                         decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.all(20),
+                                          contentPadding:
+                                              const EdgeInsets.all(20),
                                           labelText: "Correo",
                                           hintText: "Correo",
                                           labelStyle: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w400),
-                                          hintStyle:
-                                              const TextStyle(color: Colors.grey, fontSize: 14),
+                                          hintStyle: const TextStyle(
+                                              color: Colors.grey, fontSize: 14),
                                           suffixIcon: const Icon(Icons.email,
                                               color: Colors.black, size: 20),
                                           enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: Colors.grey.shade200, width: 2)),
+                                                  color: Colors.grey.shade200,
+                                                  width: 2)),
                                           floatingLabelStyle: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 18,
                                           ),
                                           focusedBorder: OutlineInputBorder(
-                                              borderSide:
-                                                  const BorderSide(color: Colors.black, width: 1.5),
-                                              borderRadius: BorderRadius.circular(20)),
-                                          focusedErrorBorder: OutlineInputBorder(
-                                              borderSide:
-                                                  const BorderSide(color: Colors.black, width: 1.5),
-                                              borderRadius: BorderRadius.circular(20)),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.black,
+                                                  width: 1.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black,
+                                                      width: 1.5),
+                                                  borderRadius: BorderRadius
+                                                      .circular(20)),
                                           errorBorder: OutlineInputBorder(
                                               borderSide: const BorderSide(
                                                 color: Colors.black,
                                                 width: 1.5,
                                               ),
-                                              borderRadius: BorderRadius.circular(20)),
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
                                         )),
                                     MaterialButton(
                                         onPressed: () {
@@ -137,13 +151,17 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                                         height: 45,
                                         color: Colors.black,
                                         child: const Text("Registrarse",
-                                            style: TextStyle(color: Colors.white, fontSize: 16)),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16)),
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10, horizontal: 50),
                                         shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10))),
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text("Ya tienes cuenta?",
                                             style: TextStyle(
@@ -158,7 +176,8 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                                                 style: TextStyle(
                                                     color: Colors.blue,
                                                     fontSize: 14,
-                                                    fontWeight: FontWeight.w400)))
+                                                    fontWeight:
+                                                        FontWeight.w400)))
                                       ],
                                     ),
                                   ],
@@ -190,7 +209,8 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        _textControllerDate.text = "${selectedDate.day}-${selectedDate.month}-${selectedDate.year}";
+        _textControllerDate.text =
+            "${selectedDate.day}-${selectedDate.month}-${selectedDate.year}";
       });
     }
   }
