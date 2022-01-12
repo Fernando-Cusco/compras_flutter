@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_auth/blocs/auth/auth_bloc.dart';
+import 'package:user_auth/products/blocs/carrito/carrito_bloc.dart';
+import 'package:user_auth/products/blocs/products/products_bloc.dart';
+import 'package:user_auth/products/services/carrito_service.dart';
+import 'package:user_auth/products/services/products_service.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 import 'package:user_auth/user/services/user_services.dart';
-import 'package:user_auth/user/views/content_views.dart';
 import 'package:user_auth/user/views/loading_view.dart';
 import 'package:user_auth/user/views/user_views.dart';
 import 'package:jwt_decode/jwt_decode.dart';
@@ -17,6 +20,10 @@ void main() {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (context) => AuthBloc()),
     BlocProvider(create: (context) => UserBloc(UserService())),
+    BlocProvider(create: (context) => ProductsBloc(ProductsService())),
+    BlocProvider(
+        create: (context) =>
+            CarritoBloc(CarritoService(), BlocProvider.of<UserBloc>(context)))
   ], child: MyApp()));
 }
 

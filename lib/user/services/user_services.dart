@@ -28,6 +28,7 @@ class UserService {
 
   Future<Message> registrar(User user) async {
     try {
+      log("$_baseUrl/usuario/registro");
       Response response =
           await _dioHttp.post('$_baseUrl/usuario/registro', data: user.toMap());
       final message = Message.fromMap(response.data);

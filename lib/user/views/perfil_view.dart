@@ -82,7 +82,7 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    Expanded(child: ClienteView()),
+                    ClienteView(),
                     SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),

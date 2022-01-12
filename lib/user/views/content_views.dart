@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_auth/products/blocs/carrito/carrito_bloc.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 import 'package:user_auth/user/views/carrito_view.dart';
+import 'package:user_auth/user/views/compras_view.dart';
 import 'package:user_auth/user/views/inicio_view.dart';
 import 'package:user_auth/user/views/login_view.dart';
 import 'package:user_auth/user/views/opciones_view.dart';
@@ -17,10 +19,17 @@ class ContentViews extends StatefulWidget {
 }
 
 class _ContentViewsState extends State<ContentViews> {
+  @override
+  void initState() {
+    BlocProvider.of<CarritoBloc>(context).cargarCarrito();
+    super.initState();
+  }
+
   final pages = const [
     InicioView(),
-    CarritoView(),
     OpcionesView(),
+    CarritoView(),
+    ComprasView(),
     PerfilView()
   ];
   int currentIndex = 0;
@@ -45,8 +54,10 @@ class _ContentViewsState extends State<ContentViews> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.apps), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Bar"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "My"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart_rounded), label: "Carrito"),
+          BottomNavigationBarItem(icon: Icon(Icons.shop), label: "Compras"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Me"),
         ],
       ),
     );
