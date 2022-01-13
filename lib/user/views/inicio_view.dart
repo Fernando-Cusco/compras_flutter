@@ -17,6 +17,8 @@ class _InicioViewState extends State<InicioView> {
   @override
   Widget build(BuildContext context) {
     final carritoBloc = BlocProvider.of<CarritoBloc>(context);
+    final productoBloc = BlocProvider.of<ProductsBloc>(context);
+    final userBloc = BlocProvider.of<UserBloc>(context);
     final imagenes = [
       'assets/img/productos/airpods.png',
       'assets/img/productos/mac.png',
@@ -74,7 +76,23 @@ class _InicioViewState extends State<InicioView> {
                                       style: TextStyle(color: Colors.black)),
                                 )),
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                if (state.productos[index].esFavorito) {
+                                  setState(() {
+                                    productoBloc.eliminarFavorito(
+                                        userBloc.state.user.cliente!.cedula,
+                                        state.productos[index].id);
+                                    state.productos[index].esFavorito = false;
+                                  });
+                                } else {
+                                  setState(() {
+                                    productoBloc.agregarFavorito(
+                                        userBloc.state.user.cliente!.cedula,
+                                        state.productos[index].id);
+                                    state.productos[index].esFavorito = true;
+                                  });
+                                }
+                              },
                               icon: (!state.productos[index].esFavorito)
                                   ? const Icon(Icons.favorite_border,
                                       color: Colors.black)

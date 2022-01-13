@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   bool _initialized = false;
   bool _error = false;
   bool _isCorrectToken = false;
+  int _id = 0;
 
   void initializeFlutterFire() async {
     try {
@@ -62,7 +63,6 @@ class _MyAppState extends State<MyApp> {
             if (!Jwt.isExpired(token)) {
               if (correo != null && password != null) {
                 userBloc.login(correo, password).then((user) {
-                  log(user.correo);
                   if (user.id == 0) {
                     _isCorrectToken = false;
                   } else if (user.id == -1) {
@@ -70,7 +70,6 @@ class _MyAppState extends State<MyApp> {
                   } else {
                     prefs.setString('token', user.token!);
                     _isCorrectToken = true;
-                    log(userBloc.state.user.estado.toString());
                   }
                 });
               } else {
@@ -80,7 +79,6 @@ class _MyAppState extends State<MyApp> {
             _isCorrectToken = Jwt.isExpired(token) ? false : true;
           })
         : setState(() {
-            log("NO hay token");
             _isCorrectToken = false;
           });
   }

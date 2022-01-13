@@ -14,10 +14,6 @@ class UserService {
       Response response = await _dioHttp.post('$_baseUrl/usuario/login',
           data: {'correo': correo, 'password': password});
       final user = User.fromMap(response.data);
-      if (user.cliente != null) {
-        log(user.cliente!.nombres);
-        log(user.cliente!.apellidos);
-      }
       return user;
       // return response.data;
     } catch (e) {
@@ -28,13 +24,11 @@ class UserService {
 
   Future<Message> registrar(User user) async {
     try {
-      log("$_baseUrl/usuario/registro");
       Response response =
           await _dioHttp.post('$_baseUrl/usuario/registro', data: user.toMap());
       final message = Message.fromMap(response.data);
       return message;
     } catch (e) {
-      log(e.toString());
       return Message(code: 0, message: 'Error al registrar', status: false);
     }
   }
@@ -44,9 +38,6 @@ class UserService {
       Response response =
           await _dioHttpCliente.put('$_baseUrl/cliente', data: cliente.toMap());
       final data = Message.fromMap(response.data);
-      log(data.message);
-      log(data.status.toString());
-      log(data.code.toString());
       return data;
     } catch (e) {
       log(e.toString());

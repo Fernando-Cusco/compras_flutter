@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_auth/helpers/show_loading_messages.dart';
+import 'package:user_auth/products/blocs/products/products_bloc.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 import 'package:user_auth/user/views/cliente_view.dart';
 import 'package:user_auth/user/views/login_view.dart';
@@ -31,7 +32,6 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
-    final userBloc = BlocProvider.of<UserBloc>(context);
     return SingleChildScrollView(
       child: SizedBox(
         width: double.infinity,
@@ -51,6 +51,8 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                     icon: const Icon(Icons.logout, color: Colors.black),
                     onPressed: () {
                       BlocProvider.of<UserBloc>(context).cerrarSesion();
+                      BlocProvider.of<ProductsBloc>(context)
+                          .add(OnLimpiarProductosEvent());
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

@@ -18,3 +18,5 @@ class OnLoadedProductsEvent extends ProductsEvent {
 
   const OnLoadedProductsEvent({required this.products});
 }
+
+class OnLimpiarProductosEvent extends ProductsEvent {}

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_auth/products/blocs/carrito/carrito_bloc.dart';
+import 'package:user_auth/products/blocs/products/products_bloc.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 import 'package:user_auth/user/views/carrito_view.dart';
 import 'package:user_auth/user/views/compras_view.dart';
@@ -21,6 +22,8 @@ class ContentViews extends StatefulWidget {
 class _ContentViewsState extends State<ContentViews> {
   @override
   void initState() {
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    BlocProvider.of<ProductsBloc>(context).getProducts(userBloc.state.user.id!);
     BlocProvider.of<CarritoBloc>(context).cargarCarrito();
     super.initState();
   }

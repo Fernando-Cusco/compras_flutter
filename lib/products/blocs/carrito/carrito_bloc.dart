@@ -43,7 +43,6 @@ class CarritoBloc extends Bloc<CarritoEvent, CarritoState> {
   }
 
   Future<void> cargarCarrito() async {
-    log("cedula del cliente");
     if (userBloc.state.user.cliente != null) {
       final detalles =
           await carritoService.verCarrito(userBloc.state.user.cliente!.cedula);

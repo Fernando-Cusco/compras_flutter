@@ -45,17 +45,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             isCorrectCredentials: false,
             isUserLoggedIn: false,
             user: User.empty()));
-        log("Credenciales incorrectas");
       } else if (user.id == -1) {
         add(OnUserLogin(
             isCorrectCredentials: false,
             isUserLoggedIn: false,
             user: User.empty()));
-        log("Error");
       } else {
         add(OnUserLogin(
             isCorrectCredentials: true, isUserLoggedIn: true, user: user));
-        log("Correcto");
         if (user.cliente != null) {
           add(OnClientUpdate(cliente: user.cliente!));
         }

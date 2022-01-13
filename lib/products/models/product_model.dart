@@ -33,7 +33,7 @@ class Producto {
   final int descuentoPorcentaje;
   final double valorDescuento;
   final double precioFinal;
-  final bool esFavorito;
+  bool esFavorito;
 
   factory Producto.fromJson(String str) => Producto.fromMap(json.decode(str));
 
