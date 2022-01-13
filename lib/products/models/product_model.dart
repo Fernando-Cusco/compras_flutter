@@ -14,6 +14,7 @@ class Producto {
     required this.promocion,
     required this.caracteristicas,
     required this.imagenes,
+    required this.esFavorito,
     required this.precioInicial,
     required this.descuentoPorcentaje,
     required this.valorDescuento,
@@ -32,6 +33,7 @@ class Producto {
   final int descuentoPorcentaje;
   final double valorDescuento;
   final double precioFinal;
+  final bool esFavorito;
 
   factory Producto.fromJson(String str) => Producto.fromMap(json.decode(str));
 
@@ -43,6 +45,7 @@ class Producto {
         descripcion: json["descripcion"],
         estado: json["estado"],
         stock: json["stock"],
+        esFavorito: json["esFavorito"],
         promocion: json["promocion"],
         caracteristicas: List<Caracteristica>.from(
             json["caracteristicas"].map((x) => Caracteristica.fromMap(x))),
@@ -60,6 +63,7 @@ class Producto {
         "descripcion": descripcion,
         "estado": estado,
         "stock": stock,
+        "esFavorito": esFavorito,
         "promocion": promocion,
         "caracteristicas":
             List<dynamic>.from(caracteristicas.map((x) => x.toMap())),

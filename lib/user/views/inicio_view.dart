@@ -75,8 +75,11 @@ class _InicioViewState extends State<InicioView> {
                                 )),
                             IconButton(
                               onPressed: () {},
-                              icon: const Icon(Icons.favorite_border,
-                                  color: Colors.black),
+                              icon: (!state.productos[index].esFavorito)
+                                  ? const Icon(Icons.favorite_border,
+                                      color: Colors.black)
+                                  : const Icon(Icons.favorite_sharp,
+                                      color: Colors.black),
                             ),
                           ],
                         )
