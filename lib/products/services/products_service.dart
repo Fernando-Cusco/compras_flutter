@@ -21,12 +21,27 @@ class ProductsService {
     }
   }
 
+  Future<List<int>> listarFavoritosCliente(int id) async {
+    try {
+      final List<int> productosId = [];
+      final response = await _dio.get("$_baseUrl/favorito/$id");
+      final List data = response.data;
+      log(data.length.toString());
+      data.map((e) {
+        productosId.add(e);
+      }).toList();
+      return productosId;
+    } on DioError catch (e) {
+      log(e.toString());
+      return [];
+    }
+  }
+
   Future agregarFavorito(String cedula, int idProducto) async {
     try {
       final response =
-          await _dio.post("$_baseUrl/compra/favorito/$cedula/$idProducto");
-      log(response.data);
-    } catch (e) {
+          await _dio.post("$_baseUrl/favorito/$cedula/$idProducto");
+    } on DioError catch (e) {
       log(e.toString().toString());
     }
   }
@@ -34,9 +49,9 @@ class ProductsService {
   Future eliminarFavorito(String cedula, int idProducto) async {
     try {
       final response =
-          await _dio.delete("$_baseUrl/compra/favorito/$cedula/$idProducto");
+          await _dio.delete("$_baseUrl/favorito/$cedula/$idProducto");
       log(response.data.toString());
-    } catch (e) {
+    } on DioError catch (e) {
       log(e.toString());
     }
   }

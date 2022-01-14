@@ -1,9 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:user_auth/products/blocs/products/products_bloc.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 import 'package:user_auth/user/views/content_views.dart';
 

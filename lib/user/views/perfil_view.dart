@@ -53,6 +53,9 @@ class _PerfilViewState extends State<PerfilView> with TickerProviderStateMixin {
                       BlocProvider.of<UserBloc>(context).cerrarSesion();
                       BlocProvider.of<ProductsBloc>(context)
                           .add(OnLimpiarProductosEvent());
+                      BlocProvider.of<ProductsBloc>(context)
+                          .add(const OnCargarFavoritosEvent(favoritos: []));
+
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

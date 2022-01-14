@@ -16,7 +16,7 @@ class UserService {
       final user = User.fromMap(response.data);
       return user;
       // return response.data;
-    } catch (e) {
+    } on DioError catch (e) {
       log(e.toString());
       return User.empty();
     }
@@ -28,7 +28,8 @@ class UserService {
           await _dioHttp.post('$_baseUrl/usuario/registro', data: user.toMap());
       final message = Message.fromMap(response.data);
       return message;
-    } catch (e) {
+    } on DioError catch (e) {
+      log(e.toString());
       return Message(code: 0, message: 'Error al registrar', status: false);
     }
   }
@@ -39,7 +40,7 @@ class UserService {
           await _dioHttpCliente.put('$_baseUrl/cliente', data: cliente.toMap());
       final data = Message.fromMap(response.data);
       return data;
-    } catch (e) {
+    } on DioError catch (e) {
       log(e.toString());
       return Message(message: "error", code: -1, status: false);
     }

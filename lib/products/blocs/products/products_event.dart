@@ -20,3 +20,9 @@ class OnLoadedProductsEvent extends ProductsEvent {
 }
 
 class OnLimpiarProductosEvent extends ProductsEvent {}
+
+class OnCargarFavoritosEvent extends ProductsEvent {
+  final List<Producto> favoritos;
+
+  const OnCargarFavoritosEvent({required this.favoritos});
+}

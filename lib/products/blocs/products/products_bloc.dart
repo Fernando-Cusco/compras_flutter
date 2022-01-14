@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:user_auth/products/models/product_model.dart';
@@ -9,7 +11,7 @@ part 'products_state.dart';
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final ProductsService productsService;
   ProductsBloc(this.productsService)
-      : super(const ProductsState(productos: [])) {
+      : super(const ProductsState(productos: [], favoritos: [])) {
     on<OnLimpiarProductosEvent>(
         (event, emit) => {emit(state.copyWith(productos: []))});
     on<OnLoadingProductsEvent>((event, emit) {
@@ -18,10 +20,31 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     on<OnLoadedProductsEvent>((event, emit) {
       emit(state.copyWith(productos: event.products));
     });
+
+    on<OnCargarFavoritosEvent>(
+        (event, emit) => {emit(state.copyWith(favoritos: event.favoritos))});
   }
   Future getProducts(int id) async {
     final productos = await productsService.getProducts(id);
     add(OnLoadedProductsEvent(products: productos));
+  }
+
+  Future listarFavoritosCliente(int id) async {
+    List<int> productosId = await productsService.listarFavoritosCliente(id);
+    List<Producto> productos = [];
+    if (productosId.isNotEmpty) {
+      for (var p in state.productos) {
+        log(p.id.toString());
+        for (var e in productosId) {
+          if (p.id == e) {
+            productos.add(p);
+          }
+        }
+      }
+      add(OnCargarFavoritosEvent(favoritos: productos));
+    } else {
+      add(const OnCargarFavoritosEvent(favoritos: []));
+    }
   }
 
   Future agregarFavorito(String cedula, int idProducto) async {

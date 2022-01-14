@@ -1,34 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_auth/products/blocs/products/products_bloc.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
 
-class OpcionesView extends StatelessWidget {
+class OpcionesView extends StatefulWidget {
   const OpcionesView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<OpcionesView> createState() => _OpcionesViewState();
+}
+
+class _OpcionesViewState extends State<OpcionesView> {
+  @override
+  void initState() {
+    super.initState();
     final userBloc = BlocProvider.of<UserBloc>(context);
-    return BlocBuilder<UserBloc, UserState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            title: Text(
-              state.user.username ?? "",
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
-          body: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                Text(state.user.correo),
-                Text(state.user.username ?? ""),
-                Text(state.user.estado.toString()),
-              ])),
-        );
-      },
+    BlocProvider.of<ProductsBloc>(context)
+        .listarFavoritosCliente(userBloc.state.user.cliente!.id!);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: const Text(
+          "Favoritos",
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      body: BlocBuilder<ProductsBloc, ProductsState>(
+        builder: (context, state) {
+          if (state.favoritos.isEmpty) {
+            return const Center(
+              child: Text('No tienes productos favoritos'),
+            );
+          }
+          return ListView.builder(
+            itemCount: state.favoritos.length,
+            itemBuilder: (context, index) {
+              final producto = state.favoritos[index];
+              return ListTile(
+                title: Text(producto.nombre),
+                subtitle: Text(producto.descripcion ?? ""),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {},
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
