@@ -19,10 +19,9 @@ class CarritoView extends StatelessWidget {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Colors.transparent,
-              title: const Text(
-                "Carrito",
-                style: TextStyle(color: Colors.black),
-              ),
+              title: const Text('Carrito de compras',
+                  style: TextStyle(color: Colors.black, fontSize: 25)),
+              centerTitle: true,
             ),
             body: BlocBuilder<CarritoBloc, CarritoState>(
               builder: (context, state) {
@@ -134,6 +133,7 @@ class CarritoView extends StatelessWidget {
   Widget total(List<Detalle> detalles) {
     double total = 0;
     detalles.map((detalle) => total += detalle.subtotal).toList();
-    return Text("\$ $total", style: const TextStyle(fontSize: 20));
+    return Text("\$ ${total.toStringAsFixed(2)}",
+        style: const TextStyle(fontSize: 20));
   }
 }

@@ -68,6 +68,7 @@ class _ContentViewsState extends State<ContentViews> {
   }
 
   void onTap(int index) {
+    log(index.toString());
     setState(() {
       currentIndex = index;
     });

@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_auth/products/blocs/carrito/carrito_bloc.dart';
 import 'package:user_auth/user/blocs/user/user_bloc.dart';
+import 'package:user_auth/user/views/detalle_compra_view.dart';
 
 class ComprasView extends StatefulWidget {
   const ComprasView({Key? key}) : super(key: key);
@@ -25,10 +28,12 @@ class _ComprasViewState extends State<ComprasView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title:
-              const Text('Mis compras', style: TextStyle(color: Colors.black))),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: const Text('Mis compras',
+            style: TextStyle(color: Colors.black, fontSize: 25)),
+        centerTitle: true,
+      ),
       body: SizedBox(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
@@ -43,9 +48,17 @@ class _ComprasViewState extends State<ComprasView> {
                         itemCount: state.compras.length,
                         itemBuilder: (context, index) {
                           return ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetalleCompraView(
+                                        compra: state.compras[index])),
+                              );
+                            },
                             title: Text(state.compras[index].estadoCompra),
                             subtitle: Text(
-                                "Total \$${state.compras[index].total}",
+                                "Total \$${state.compras[index].total.toStringAsFixed(2)}",
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),

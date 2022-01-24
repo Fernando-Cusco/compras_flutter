@@ -25,10 +25,9 @@ class _OpcionesViewState extends State<OpcionesView> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: const Text(
-          "Favoritos",
-          style: TextStyle(color: Colors.black),
-        ),
+        title: const Text('Favoritos',
+            style: TextStyle(color: Colors.black, fontSize: 25)),
+        centerTitle: true,
       ),
       body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
