@@ -24,13 +24,6 @@ class _OpcionesViewState extends State<OpcionesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text('Favoritos',
-            style: TextStyle(color: Colors.black, fontSize: 25)),
-        centerTitle: true,
-      ),
       body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
           if (state.favoritos.isEmpty) {

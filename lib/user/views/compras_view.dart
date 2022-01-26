@@ -27,13 +27,6 @@ class _ComprasViewState extends State<ComprasView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text('Mis compras',
-            style: TextStyle(color: Colors.black, fontSize: 25)),
-        centerTitle: true,
-      ),
       body: SizedBox(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,

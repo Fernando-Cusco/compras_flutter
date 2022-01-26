@@ -36,11 +36,20 @@ class _ContentViewsState extends State<ContentViews> {
     PerfilView()
   ];
   int currentIndex = 0;
-
+  final pagesName = ['Inicio', 'Opciones', 'Carrito', 'Compras', 'Perfil'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      drawerScrimColor: Colors.black54,
+      appBar: AppBar(
+        foregroundColor: Colors.black,
+        centerTitle: true,
+        title: Text(pagesName[currentIndex],
+            style: const TextStyle(color: Colors.black)),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: _menu(),
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         unselectedFontSize: 0,
@@ -72,5 +81,73 @@ class _ContentViewsState extends State<ContentViews> {
     setState(() {
       currentIndex = index;
     });
+  }
+
+  Widget _menu() {
+    const styleTextIcons = TextStyle(
+        color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400);
+    const iconsColor = Colors.black;
+    return Drawer(
+        child: ListView(
+      padding: EdgeInsets.zero,
+      children: <Widget>[
+        const DrawerHeader(
+          child: Text(
+            "Menu",
+            style: TextStyle(color: Colors.black, fontSize: 25),
+          ),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage("assets/img/wrap.jpeg"),
+            fit: BoxFit.cover,
+          )),
+        ),
+        ListTile(
+          leading: const Icon(Icons.home, color: iconsColor),
+          title: const Text("Inicio", style: styleTextIcons),
+          onTap: () {
+            setState(() {
+              currentIndex = 0;
+            });
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.person, color: iconsColor),
+          title: const Text("Perfil", style: styleTextIcons),
+          onTap: () {
+            setState(() {
+              currentIndex = 4;
+            });
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.shopping_cart, color: iconsColor),
+          title: const Text("Carrito", style: styleTextIcons),
+          onTap: () {
+            setState(() {
+              currentIndex = 2;
+            });
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.shop, color: iconsColor),
+          title: const Text("Compras", style: styleTextIcons),
+          onTap: () {
+            setState(() {
+              currentIndex = 3;
+            });
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.exit_to_app, color: iconsColor),
+          title: const Text("Salir", style: styleTextIcons),
+          onTap: () {},
+        ),
+      ],
+    ));
   }
 }

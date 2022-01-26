@@ -23,13 +23,6 @@ class _InicioViewState extends State<InicioView> {
     final userBloc = BlocProvider.of<UserBloc>(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text('Productos',
-            style: TextStyle(color: Colors.black, fontSize: 25)),
-        centerTitle: true,
-      ),
       body: BlocBuilder<ProductsBloc, ProductsState>(builder: (context, state) {
         if (state.productos.isEmpty) {
           return const Center(
@@ -55,10 +48,14 @@ class _InicioViewState extends State<InicioView> {
                 child: Stack(alignment: Alignment.center, children: [
                   Positioned(
                     top: -10,
-                    child: Image.network(
-                      "http://192.168.0.109:8080/api/imagen/get/${state.productos[index].imagenes[0].path}",
-                      fit: BoxFit.fill,
-                      width: size.width * 0.4,
+                    child: Hero(
+                      transitionOnUserGestures: true,
+                      tag: state.productos[index].id,
+                      child: Image.network(
+                        "http://192.168.0.109:8080/api/imagen/get/${state.productos[index].imagenes[0].path}",
+                        fit: BoxFit.fill,
+                        width: size.width * 0.4,
+                      ),
                     ),
                   ),
                   Positioned(

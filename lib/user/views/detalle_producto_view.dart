@@ -74,9 +74,13 @@ class _DetalleProductoViewState extends State<DetalleProductoView> {
                 backgroundColor: Colors.white,
                 expandedHeight: 250.0,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                      "http://192.168.0.109:8080/api/imagen/get/${widget.producto.imagenes[0].path}",
-                      fit: BoxFit.cover),
+                  background: Hero(
+                    transitionOnUserGestures: true,
+                    tag: widget.producto.id,
+                    child: Image.network(
+                        "http://192.168.0.109:8080/api/imagen/get/${widget.producto.imagenes[0].path}",
+                        fit: BoxFit.cover),
+                  ),
                 )),
             //3
             SliverList(
