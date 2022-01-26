@@ -112,9 +112,11 @@ class CarritoView extends StatelessWidget {
                                     final message =
                                         await carritoBloc.realizarCompra(
                                             userState.user.cliente!.cedula);
-                                    log(message.message);
-                                    log(message.code.toString());
-                                    log(message.status.toString());
+                                    final snackBar = SnackBar(
+                                        content: Text(message.message),
+                                        duration: const Duration(seconds: 2));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
                                   }
                                   Navigator.pop(context);
                                 }),

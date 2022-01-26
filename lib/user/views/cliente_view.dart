@@ -219,6 +219,7 @@ class _ClienteViewState extends State<ClienteView> {
                     final cedula = _cedulaController.text;
                     final direccion = _direccioController.text;
                     final cliente = Cliente(
+                        id: userBloc.state.user.cliente!.id,
                         nombres: nombres,
                         apellidos: apellidos,
                         cedula: cedula,

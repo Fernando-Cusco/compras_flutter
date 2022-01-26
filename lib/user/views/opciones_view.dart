@@ -15,8 +15,10 @@ class _OpcionesViewState extends State<OpcionesView> {
   void initState() {
     super.initState();
     final userBloc = BlocProvider.of<UserBloc>(context);
-    BlocProvider.of<ProductsBloc>(context)
-        .listarFavoritosCliente(userBloc.state.user.cliente!.id!);
+    if (userBloc.state.user.cliente != null) {
+      BlocProvider.of<ProductsBloc>(context)
+          .listarFavoritosCliente(userBloc.state.user.cliente!.id);
+    }
   }
 
   @override

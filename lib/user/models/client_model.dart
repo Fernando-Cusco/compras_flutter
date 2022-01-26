@@ -6,7 +6,7 @@ import 'dart:convert';
 
 class Cliente {
   Cliente({
-    this.id,
+    required this.id,
     required this.nombres,
     required this.apellidos,
     required this.cedula,
@@ -14,7 +14,7 @@ class Cliente {
     this.correo,
   });
 
-  final int? id;
+  final int id;
   final String nombres;
   final String apellidos;
   final String cedula;
@@ -22,6 +22,7 @@ class Cliente {
   final String? correo;
 
   factory Cliente.empty() => Cliente(
+        id: 0,
         nombres: '',
         apellidos: '',
         cedula: '',
